@@ -9,7 +9,7 @@
 --platform=linux/arm64 appleboy/drone-ssh:latest
 --platform=linux/arm64 appleboy/drone-scp:latest
 --platform=linux/arm64 node:18.20.1
---platform=linux/arm64 node:22.22.0-trixie-slim
+--platform=linux/arm64 node:22.22.0
 --platform=linux/arm64 ghcr.io/graalvm/native-image:ol8-java17-22.3.3
 --platform=linux/arm64 filebrowser/filebrowser:v2
 #支持私库
