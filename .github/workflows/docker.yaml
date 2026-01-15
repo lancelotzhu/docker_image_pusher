@@ -79,7 +79,7 @@ jobs:
             image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
             echo "image_name_tag $image_name_tag"
             # 获取命名空间 例如kasmweb,  这里有种特殊情况 docker.io/nginx，把docker.io当成命名空间，也OK
-            name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print "$1_$2"; else if (NF==2) print $1; else print ""}')
+            name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print $1 "_" $2; else if (NF==2) print $1; else print ""}')
             echo "name_space: $name_space"
             # 这里不要是空值影响判断
             name_space="${name_space}_"
@@ -112,20 +112,20 @@ jobs:
             docker pull $line
             platform=$(echo "$line" | awk -F'--platform[ =]' '{if (NF>1) print $2}' | awk '{print $1}')
             echo "platform is $platform"
-            # 如果存在架构信息 将架构信息拼到镜像名称前面
+            # 如果存在架构信息 将架构信息拼到版本后面
             if [ -z "$platform" ]; then
-                platform_prefix=""
+                platform_suffix=""
             else
-                platform_prefix="_${platform//\//_}"
+                platform_suffix="_${platform//\//_}"
             fi
-            echo "platform_prefix is $platform_prefix"
+            echo "platform_suffix is $platform_suffix"
             # 获取镜像的完整名称，例如kasmweb/nginx:1.25.3（命名空间/镜像名:版本号）
             image=$(echo "$line" | awk '{print $NF}')
 
             # 获取 镜像名:版本号  例如nginx:1.25.3
             image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
             # 获取命名空间 例如kasmweb  这里有种特殊情况 docker.io/nginx，把docker.io当成命名空间，也OK
-            name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print "$1_$2"; else if (NF==2) print $1; else print ""}')
+            name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print $1 "_" $2; else if (NF==2) print $1; else print ""}')
             # 获取镜像名例  例如nginx
             image_name=$(echo "$image_name_tag" | awk -F':' '{print $1}')
         
@@ -137,7 +137,7 @@ jobs:
             
             # 将@sha256:等字符删除
             image_name_tag="${image_name_tag%%@*}"
-            new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$name_space_prefix$image_name_tag$platform_prefix"
+            new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$name_space_prefix$image_name_tag$platform_suffix"
             echo "docker tag $image $new_image"
             docker tag $image $new_image
             echo "docker push $new_image"
