@@ -1,11 +1,14 @@
 --platform=linux/arm64 nginx:1.27.1
+--platform=linux/arm64 ubuntu:22.04
+--platform=linux/arm64 timescale/timecaledb:2.9.1-pg14
 --platform=linux/arm64 codercom/code-server:4.92.2
 --platform=linux/arm64 drone/drone:2
 --platform=linux/arm64 drone/drone-runner-docker:1.8
 --platform=linux/arm64 drone/git:latest
---platform=linux/arm64 appleboy/drone-scp:latest
 --platform=linux/arm64 appleboy/drone-ssh:latest
+--platform=linux/arm64 appleboy/drone-scp:latest
 --platform=linux/arm64 node:18.20.1
+--platform=linux/arm64 node:22.22.0-trixie-slim
 --platform=linux/arm64 ghcr.io/graalvm/native-image:ol8-java17-22.3.3
 --platform=linux/arm64 filebrowser/filebrowser:latest
 #支持私库
