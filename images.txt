@@ -1,6 +1,7 @@
 --platform=linux/arm64 nginx:1.27.1
+--platform=linux/arm64 nginx:1.28.1-trixie
 --platform=linux/arm64 ubuntu:22.04
---platform=linux/arm64 timescale/timecaledb:2.9.1-pg14
+--platform=linux/arm64 timescale/timescaledb:2.9.1-pg14
 --platform=linux/arm64 codercom/code-server:4.92.2
 --platform=linux/arm64 drone/drone:2
 --platform=linux/arm64 drone/drone-runner-docker:1.8
